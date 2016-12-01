@@ -22,7 +22,12 @@ app.get('/:date', function(req, res) {
     var userDate = req.params.date
     var unixTime = ""
     var naturalTime = ""
-    if( (new Date(userDate*1000)).getTime()/1000|0 === userDate ) {
+
+    if( !userDate ) {
+      res.send("Please enter a valid date.")
+    }
+
+    else if( (new Date(userDate*1000)).getTime()/1000|0 === userDate ) {
       userDate = new Date(userDate*1000)
       unixTime = (userDate.getTime()/1000|0).toString()
       naturalTime = monthNames[userDate.getMonth()] + ' ' + userDate.getDate() + ', ' + userDate.getFullYear()
